@@ -1663,8 +1663,9 @@ declare global {
       ) => Promise<{
         success: boolean;
         transcription?: TranscriptionItem;
+        warning?: string;
         error?: string;
-        code?: TranscriptionErrorCode;
+        code?: string;
         messageKey?: string;
       }>;
       updateTranscriptionText: (
