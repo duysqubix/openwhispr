@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Corti 模型仅在欧盟地区可用。"
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT（订阅）",
+      "description": "使用你的 ChatGPT Plus 或 Pro 订阅，无需 API 密钥。",
+      "signIn": "使用 ChatGPT 登录",
+      "waiting": "请在浏览器中完成登录…",
+      "cancel": "取消",
+      "signedIn": "已登录 ChatGPT",
+      "signedInAs": "已登录为 {{email}}",
+      "plan": "套餐：{{plan}}",
+      "signOut": "退出登录",
+      "signInFailed": "登录失败，请重试。",
+      "portBusy": "端口 1455 已被占用，可能是 Codex CLI 正在登录。请关闭后重试。",
+      "timedOut": "登录超时，请重试。",
+      "signInToSeeModels": "登录后即可查看你的套餐包含的模型。",
+      "loadingModels": "正在加载模型…",
+      "modelsFallback": "无法加载你的套餐模型，正在显示默认模型。"
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "已拒绝",
     "permissionRestricted": "受限",
     "permissionNotDetermined": "尚未请求"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "已登录 ChatGPT",
+      "successBody": "你可以关闭此标签页并返回 OpenWhispr。",
+      "failedTitle": "ChatGPT 登录失败",
+      "failedBody": "请返回 OpenWhispr 并重试。"
+    },
+    "errors": {
+      "notSignedIn": "请在设置中使用 ChatGPT 登录以使用你的订阅。",
+      "sessionExpired": "你的 ChatGPT 会话已过期，请在设置中重新登录。"
+    }
   }
 }

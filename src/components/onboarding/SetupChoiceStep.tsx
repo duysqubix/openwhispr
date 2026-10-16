@@ -145,7 +145,8 @@ export default function SetupChoiceStep({
     policy,
     agentAllowed,
     transcriptionProviders: getTranscriptionProviders(),
-    llmProviders: modelRegistry.getCloudProviders(),
+    // ChatGPT signs in with OAuth in Settings, not through the BYOK key step.
+    llmProviders: modelRegistry.getCloudProviders().filter((provider) => provider.id !== "chatgpt"),
   });
   const {
     cloud: cloudAllowed,

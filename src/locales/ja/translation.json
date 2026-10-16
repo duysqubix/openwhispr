@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Corti のモデルは EU リージョンでのみ利用できます。"
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT（サブスクリプション）",
+      "description": "ChatGPT Plus または Pro のサブスクリプションを使用します。API キーは不要です。",
+      "signIn": "ChatGPT でサインイン",
+      "waiting": "ブラウザでサインインを完了してください…",
+      "cancel": "キャンセル",
+      "signedIn": "ChatGPT にサインインしました",
+      "signedInAs": "{{email}} としてサインイン中",
+      "plan": "プラン: {{plan}}",
+      "signOut": "サインアウト",
+      "signInFailed": "サインインに失敗しました。もう一度お試しください。",
+      "portBusy": "ポート 1455 は使用中です（Codex CLI のサインインの可能性があります）。終了してからもう一度お試しください。",
+      "timedOut": "サインインがタイムアウトしました。もう一度お試しください。",
+      "signInToSeeModels": "サインインすると、プランに含まれるモデルが表示されます。",
+      "loadingModels": "モデルを読み込んでいます…",
+      "modelsFallback": "プランのモデルを読み込めませんでした。既定のモデルを表示しています。"
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "拒否",
     "permissionRestricted": "制限あり",
     "permissionNotDetermined": "未要求"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "ChatGPT にサインインしました",
+      "successBody": "このタブを閉じて OpenWhispr に戻ってください。",
+      "failedTitle": "ChatGPT へのサインインに失敗しました",
+      "failedBody": "OpenWhispr に戻って、もう一度お試しください。"
+    },
+    "errors": {
+      "notSignedIn": "サブスクリプションを使用するには、設定で ChatGPT にサインインしてください。",
+      "sessionExpired": "ChatGPT のセッションが期限切れです。設定でもう一度サインインしてください。"
+    }
   }
 }

@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Los modelos de Corti solo están disponibles en la región de la UE."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (suscripción)",
+      "description": "Usa tu suscripción a ChatGPT Plus o Pro. No necesitas clave de API.",
+      "signIn": "Iniciar sesión con ChatGPT",
+      "waiting": "Termina de iniciar sesión en tu navegador…",
+      "cancel": "Cancelar",
+      "signedIn": "Sesión iniciada en ChatGPT",
+      "signedInAs": "Sesión iniciada como {{email}}",
+      "plan": "Plan: {{plan}}",
+      "signOut": "Cerrar sesión",
+      "signInFailed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
+      "portBusy": "El puerto 1455 está en uso, posiblemente por un inicio de sesión de Codex CLI. Ciérralo e inténtalo de nuevo.",
+      "timedOut": "Se agotó el tiempo para iniciar sesión. Inténtalo de nuevo.",
+      "signInToSeeModels": "Inicia sesión para ver los modelos que incluye tu plan.",
+      "loadingModels": "Cargando modelos…",
+      "modelsFallback": "No se pudieron cargar los modelos de tu plan. Se muestran los predeterminados."
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "Denegado",
     "permissionRestricted": "Restringido",
     "permissionNotDetermined": "No solicitado"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "Sesión iniciada en ChatGPT",
+      "successBody": "Puedes cerrar esta pestaña y volver a OpenWhispr.",
+      "failedTitle": "No se pudo iniciar sesión en ChatGPT",
+      "failedBody": "Vuelve a OpenWhispr e inténtalo de nuevo."
+    },
+    "errors": {
+      "notSignedIn": "Inicia sesión con ChatGPT en Ajustes para usar tu suscripción.",
+      "sessionExpired": "Tu sesión de ChatGPT caducó. Vuelve a iniciar sesión en Ajustes."
+    }
   }
 }

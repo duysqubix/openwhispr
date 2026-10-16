@@ -699,6 +699,15 @@ contextBridge.exposeInMainWorld("electronAPI", {
   processAnthropicReasoning: (text, modelId, agentName, config) =>
     ipcRenderer.invoke("process-anthropic-reasoning", text, modelId, agentName, config),
 
+  // ChatGPT subscription (OAuth sign-in; tokens stay in main)
+  chatgptAuthStatus: () => ipcRenderer.invoke("chatgpt-auth-status"),
+  chatgptSignIn: () => ipcRenderer.invoke("chatgpt-auth-sign-in"),
+  chatgptCancelSignIn: () => ipcRenderer.invoke("chatgpt-auth-cancel-sign-in"),
+  chatgptSignOut: () => ipcRenderer.invoke("chatgpt-auth-sign-out"),
+  chatgptListModels: () => ipcRenderer.invoke("chatgpt-list-models"),
+  processChatGptReasoning: (text, modelId, agentName, config) =>
+    ipcRenderer.invoke("process-chatgpt-reasoning", text, modelId, agentName, config),
+
   // Enterprise reasoning (Bedrock, Azure, Vertex) — runs in main process so
   // Node-only SDKs (AWS/Azure/Google credential providers) can resolve.
   processEnterpriseReasoning: (text, modelId, agentName, config) =>

@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Модели Corti доступны только в регионе ЕС."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (подписка)",
+      "description": "Используйте подписку ChatGPT Plus или Pro. API-ключ не нужен.",
+      "signIn": "Войти через ChatGPT",
+      "waiting": "Завершите вход в браузере…",
+      "cancel": "Отмена",
+      "signedIn": "Вход в ChatGPT выполнен",
+      "signedInAs": "Вы вошли как {{email}}",
+      "plan": "Тариф: {{plan}}",
+      "signOut": "Выйти",
+      "signInFailed": "Не удалось войти. Попробуйте ещё раз.",
+      "portBusy": "Порт 1455 занят, возможно, входом через Codex CLI. Закройте его и попробуйте ещё раз.",
+      "timedOut": "Время входа истекло. Попробуйте ещё раз.",
+      "signInToSeeModels": "Войдите, чтобы увидеть модели вашего тарифа.",
+      "loadingModels": "Загрузка моделей…",
+      "modelsFallback": "Не удалось загрузить модели вашего тарифа. Показаны модели по умолчанию."
     }
   },
   "transcription": {
@@ -4995,5 +5012,17 @@
     "permissionDenied": "Отклонено",
     "permissionRestricted": "Ограничено",
     "permissionNotDetermined": "Не запрашивалось"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "Вход в ChatGPT выполнен",
+      "successBody": "Можно закрыть эту вкладку и вернуться в OpenWhispr.",
+      "failedTitle": "Не удалось войти в ChatGPT",
+      "failedBody": "Вернитесь в OpenWhispr и попробуйте ещё раз."
+    },
+    "errors": {
+      "notSignedIn": "Войдите через ChatGPT в настройках, чтобы использовать подписку.",
+      "sessionExpired": "Сеанс ChatGPT истёк. Войдите снова в настройках."
+    }
   }
 }

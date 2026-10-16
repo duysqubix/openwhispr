@@ -14,6 +14,7 @@ import ModelCardList from "./ui/ModelCardList";
 import LocalModelPicker, { type LocalProvider } from "./LocalModelPicker";
 import { ProviderTabs, type ProviderTabItem } from "./ui/ProviderTabs";
 import OpenAICompatiblePanel from "./OpenAICompatiblePanel";
+import ChatGptProviderPanel from "./ChatGptProviderPanel";
 import { API_ENDPOINTS } from "../config/constants";
 import {
   REASONING_PROVIDERS,
@@ -58,6 +59,9 @@ const CLOUD_PROVIDER_IDS = [
   "custom",
 ];
 
+// Subscription sign-in, offered only to scopes that make plain (tool-free) calls.
+const CHATGPT_TAB = "chatgpt";
+
 interface ReasoningModelSelectorProps {
   reasoningModel: string;
   setReasoningModel: (model: string) => void;
@@ -69,6 +73,8 @@ interface ReasoningModelSelectorProps {
   setCustomReasoningApiKey?: (key: string) => void;
   setReasoningMode?: (mode: InferenceMode) => void;
   mode?: "cloud" | "local";
+  /** Offer the ChatGPT subscription provider (scopes without tool calling only). */
+  allowChatGpt?: boolean;
 }
 
 function GpuStatusBadge() {
@@ -343,6 +349,7 @@ export default function ReasoningModelSelector({
   setCustomReasoningApiKey,
   setReasoningMode: setReasoningModeProp,
   mode,
+  allowChatGpt = false,
 }: ReasoningModelSelectorProps) {
   const { t } = useTranslation();
   const openaiApiKey = useSettingsStore((s) => s.openaiApiKey);
@@ -363,6 +370,13 @@ export default function ReasoningModelSelector({
   const [selectedCloudProvider, setSelectedCloudProvider] = useState("openai");
   const [selectedLocalProvider, setSelectedLocalProvider] = useState("qwen");
   const policyState = usePolicySnapshot();
+  const cloudProviderIds = useMemo(
+    () =>
+      allowChatGpt
+        ? [...CLOUD_PROVIDER_IDS.slice(0, -1), CHATGPT_TAB, ...CLOUD_PROVIDER_IDS.slice(-1)]
+        : CLOUD_PROVIDER_IDS,
+    [allowChatGpt]
+  );
   const providerAllowed = useCallback(
     (providerId: string) => isProviderAllowedByPolicy(policyState, "llm", providerId),
     [policyState]
@@ -371,19 +385,21 @@ export default function ReasoningModelSelector({
   const cloudProviderTabs = useMemo(
     () =>
       filterByokProviderOptionsByPolicy(
-        CLOUD_PROVIDER_IDS.map((id): ProviderTabItem => ({
+        cloudProviderIds.map((id): ProviderTabItem => ({
           id,
           name:
             id === "custom"
               ? t("reasoning.custom.providerName")
-              : id === OPENROUTER_TAB
-                ? "OpenRouter"
-                : REASONING_PROVIDERS[id as keyof typeof REASONING_PROVIDERS]?.name || id,
+              : id === CHATGPT_TAB
+                ? t("reasoning.chatgpt.providerName")
+                : id === OPENROUTER_TAB
+                  ? "OpenRouter"
+                  : REASONING_PROVIDERS[id as keyof typeof REASONING_PROVIDERS]?.name || id,
         })),
         "llm",
         policyState
       ),
-    [policyState, t]
+    [cloudProviderIds, policyState, t]
   );
   const cloudProviders = cloudProviderTabs;
   const cloudProviderFallback = reconcileProviderSelection(selectedCloudProvider, cloudProviders);
@@ -464,11 +480,11 @@ export default function ReasoningModelSelector({
     if (localProviderIds.includes(localReasoningProvider)) {
       setSelectedMode("local");
       setSelectedLocalProvider(localReasoningProvider);
-    } else if (CLOUD_PROVIDER_IDS.includes(localReasoningProvider)) {
+    } else if (cloudProviderIds.includes(localReasoningProvider)) {
       setSelectedMode("cloud");
       setSelectedCloudProvider(localReasoningProvider);
     }
-  }, [localProviders, localReasoningProvider]);
+  }, [cloudProviderIds, localProviders, localReasoningProvider]);
 
   // A selection commits only on an explicit click: the model together with
   // the provider tab it was clicked under. Tab switching is pure browsing.
@@ -571,6 +587,11 @@ export default function ReasoningModelSelector({
                   lockedBaseUrl
                   apiKeyRequired
                   getKeyUrl={OPENROUTER_KEYS_URL}
+                />
+              ) : displayedCloudProvider === CHATGPT_TAB ? (
+                <ChatGptProviderPanel
+                  selectedModel={localReasoningProvider === CHATGPT_TAB ? reasoningModel : ""}
+                  onModelSelect={handleModelSelect}
                 />
               ) : displayedCloudProvider === "custom" ? (
                 <OpenAICompatiblePanel

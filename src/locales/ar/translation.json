@@ -502,6 +502,23 @@
     },
     "corti": {
       "euOnly": "نماذج Corti متوفرة فقط في منطقة الاتحاد الأوروبي."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (اشتراك)",
+      "description": "استخدم اشتراكك في ChatGPT Plus أو Pro. لا حاجة إلى مفتاح API.",
+      "signIn": "تسجيل الدخول باستخدام ChatGPT",
+      "waiting": "أكمل تسجيل الدخول في متصفحك…",
+      "cancel": "إلغاء",
+      "signedIn": "تم تسجيل الدخول إلى ChatGPT",
+      "signedInAs": "تم تسجيل الدخول باسم {{email}}",
+      "plan": "الخطة: {{plan}}",
+      "signOut": "تسجيل الخروج",
+      "signInFailed": "تعذر تسجيل الدخول. حاول مرة أخرى.",
+      "portBusy": "المنفذ 1455 قيد الاستخدام، ربما بسبب تسجيل دخول Codex CLI. أغلقه وحاول مرة أخرى.",
+      "timedOut": "انتهت مهلة تسجيل الدخول. حاول مرة أخرى.",
+      "signInToSeeModels": "سجّل الدخول لرؤية النماذج المضمّنة في خطتك.",
+      "loadingModels": "جارٍ تحميل النماذج…",
+      "modelsFallback": "تعذر تحميل نماذج خطتك. يتم عرض النماذج الافتراضية."
     }
   },
   "controlPanel": {
@@ -5071,5 +5088,17 @@
     "permissionDenied": "مرفوض",
     "permissionRestricted": "مقيّد",
     "permissionNotDetermined": "لم يُطلب"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "تم تسجيل الدخول إلى ChatGPT",
+      "successBody": "يمكنك إغلاق علامة التبويب هذه والعودة إلى OpenWhispr.",
+      "failedTitle": "تعذر تسجيل الدخول إلى ChatGPT",
+      "failedBody": "عد إلى OpenWhispr وحاول مرة أخرى."
+    },
+    "errors": {
+      "notSignedIn": "سجّل الدخول باستخدام ChatGPT في الإعدادات لاستخدام اشتراكك.",
+      "sessionExpired": "انتهت صلاحية جلسة ChatGPT. سجّل الدخول مرة أخرى في الإعدادات."
+    }
   }
 }

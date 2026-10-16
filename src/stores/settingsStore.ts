@@ -153,7 +153,10 @@ function reasoningModelBelongsToProvider(providerId: string, modelId: string): b
   if (!modelId) return false;
   // Custom and OpenRouter ids are free-form; any remembered id is valid.
   // Tinfoil's registry entry is refreshed in place from its live catalog.
-  if (providerId === "custom" || providerId === "openrouter") return true;
+  // ChatGPT's list is fetched live per account; the registry holds a fallback.
+  if (providerId === "custom" || providerId === "openrouter" || providerId === "chatgpt") {
+    return true;
+  }
   return (
     modelRegistryData.cloudProviders
       .find((provider) => provider.id === providerId)

@@ -1366,6 +1366,13 @@ class ReasoningService extends BaseReasoningService {
         return true;
       }
 
+      // ChatGPT has no API key: a stored OAuth login is what makes it usable.
+      if (settings.cleanupProvider === "chatgpt") {
+        const status = await window.electronAPI?.chatgptAuthStatus?.();
+        logger.logReasoning("API_KEY_CHECK", { chatgpt: true, signedIn: !!status?.signedIn });
+        if (status?.signedIn) return true;
+      }
+
       // Enterprise providers: detect credentials by provider, short-circuit.
       // Runtime auth errors (expired SSO, missing ADC) surface via
       // mapEnterpriseError with actionable remediation copy.

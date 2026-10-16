@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Corti-Modelle sind nur in der EU-Region verfügbar."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (Abo)",
+      "description": "Nutze dein ChatGPT-Plus- oder -Pro-Abo. Kein API-Schlüssel nötig.",
+      "signIn": "Mit ChatGPT anmelden",
+      "waiting": "Schließe die Anmeldung in deinem Browser ab…",
+      "cancel": "Abbrechen",
+      "signedIn": "Bei ChatGPT angemeldet",
+      "signedInAs": "Angemeldet als {{email}}",
+      "plan": "Tarif: {{plan}}",
+      "signOut": "Abmelden",
+      "signInFailed": "Anmeldung fehlgeschlagen. Versuche es erneut.",
+      "portBusy": "Port 1455 wird bereits verwendet, möglicherweise von einer Codex-CLI-Anmeldung. Schließe sie und versuche es erneut.",
+      "timedOut": "Zeitüberschreitung bei der Anmeldung. Versuche es erneut.",
+      "signInToSeeModels": "Melde dich an, um die Modelle deines Tarifs zu sehen.",
+      "loadingModels": "Modelle werden geladen…",
+      "modelsFallback": "Die Modelle deines Tarifs konnten nicht geladen werden. Standardmodelle werden angezeigt."
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "Verweigert",
     "permissionRestricted": "Eingeschränkt",
     "permissionNotDetermined": "Nicht angefragt"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "Bei ChatGPT angemeldet",
+      "successBody": "Du kannst diesen Tab schließen und zu OpenWhispr zurückkehren.",
+      "failedTitle": "ChatGPT-Anmeldung fehlgeschlagen",
+      "failedBody": "Kehre zu OpenWhispr zurück und versuche es erneut."
+    },
+    "errors": {
+      "notSignedIn": "Melde dich in den Einstellungen mit ChatGPT an, um dein Abo zu nutzen.",
+      "sessionExpired": "Deine ChatGPT-Sitzung ist abgelaufen. Melde dich in den Einstellungen erneut an."
+    }
   }
 }

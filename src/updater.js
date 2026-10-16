@@ -1,8 +1,13 @@
 const { autoUpdater } = require("electron-updater");
 
+// A locally built custom app (extraMetadata.customBuild) must never be replaced
+// by an official release, so it opts out of the updater entirely.
+const isCustomBuild = Boolean(require("../package.json").customBuild);
+
 // electron-updater can only replace an AppImage on Linux; deb, rpm and tar.gz
 // installs are updated by the package manager instead.
-const isUpdaterSupported = process.platform !== "linux" || Boolean(process.env.APPIMAGE);
+const isUpdaterSupported =
+  !isCustomBuild && (process.platform !== "linux" || Boolean(process.env.APPIMAGE));
 
 class UpdateManager {
   constructor() {

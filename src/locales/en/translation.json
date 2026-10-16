@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Corti's models are only available in the EU region."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (subscription)",
+      "description": "Use your ChatGPT Plus or Pro subscription. No API key needed.",
+      "signIn": "Sign in with ChatGPT",
+      "waiting": "Finish signing in in your browser…",
+      "cancel": "Cancel",
+      "signedIn": "Signed in to ChatGPT",
+      "signedInAs": "Signed in as {{email}}",
+      "plan": "Plan: {{plan}}",
+      "signOut": "Sign out",
+      "signInFailed": "Sign-in failed. Try again.",
+      "portBusy": "Port 1455 is in use, possibly by a Codex CLI sign-in. Close it and try again.",
+      "timedOut": "Sign-in timed out. Try again.",
+      "signInToSeeModels": "Sign in to see the models your plan includes.",
+      "loadingModels": "Loading models…",
+      "modelsFallback": "Couldn't load your plan's models. Showing defaults."
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "Denied",
     "permissionRestricted": "Restricted",
     "permissionNotDetermined": "Not requested"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "Signed in to ChatGPT",
+      "successBody": "You can close this tab and return to OpenWhispr.",
+      "failedTitle": "ChatGPT sign-in failed",
+      "failedBody": "Return to OpenWhispr and try again."
+    },
+    "errors": {
+      "notSignedIn": "Sign in with ChatGPT in Settings to use your subscription.",
+      "sessionExpired": "Your ChatGPT session expired. Sign in again in Settings."
+    }
   }
 }

@@ -1015,6 +1015,19 @@ export interface ScreenRecordingAccessResult {
 
 export type CloudReasonPurpose = "cleanup" | "assistant" | "translation" | "noteFormatting";
 
+export interface ChatGptAuthStatus {
+  signedIn: boolean;
+  email?: string | null;
+  plan?: string | null;
+}
+
+export interface ChatGptModel {
+  id: string;
+  name: string;
+  efforts: string[];
+  defaultEffort?: string;
+}
+
 // Orukeet's audio language estimate, reported for the backend's per-user gate.
 export interface OrukeetLanguageRoutingTelemetry {
   version: 1;
@@ -2153,6 +2166,21 @@ declare global {
 
       // Anthropic reasoning
       processAnthropicReasoning: (
+        text: string,
+        modelId: string,
+        agentName: string | null,
+        config: any
+      ) => Promise<{ success: boolean; text?: string } & Partial<IpcErrorFields>>;
+
+      // ChatGPT subscription (OAuth sign-in; tokens stay in main)
+      chatgptAuthStatus?: () => Promise<ChatGptAuthStatus>;
+      chatgptSignIn?: () => Promise<
+        { success: boolean; code?: string | null; error?: string } & Partial<ChatGptAuthStatus>
+      >;
+      chatgptCancelSignIn?: () => Promise<{ success: boolean }>;
+      chatgptSignOut?: () => Promise<{ success: boolean; error?: string }>;
+      chatgptListModels?: () => Promise<{ models: ChatGptModel[]; fallback: boolean }>;
+      processChatGptReasoning?: (
         text: string,
         modelId: string,
         agentName: string | null,

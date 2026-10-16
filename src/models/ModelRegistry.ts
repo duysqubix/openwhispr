@@ -377,6 +377,11 @@ export function getModelProvider(modelId: string): string {
     return "openrouter";
   }
 
+  // ChatGPT's model ids are OpenAI's too, so the id lookup below would pick OpenAI.
+  if (storedProvider === "chatgpt") {
+    return "chatgpt";
+  }
+
   if (isEnterpriseProvider(storedProvider)) {
     return storedProvider;
   }

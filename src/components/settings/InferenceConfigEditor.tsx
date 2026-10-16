@@ -45,6 +45,14 @@ const MODE_LABEL_PREFIX: Record<InferenceScope, string> = {
   dictationTranslation: "settingsPage.aiModels.modes",
 };
 
+// Scopes whose calls are plain, tool-free text completions (ReasoningService.processText),
+// the only path the ChatGPT subscription provider implements.
+const CHATGPT_SCOPES: ReadonlySet<InferenceScope> = new Set([
+  "dictationCleanup",
+  "noteFormatting",
+  "dictationTranslation",
+]);
+
 interface InferenceConfigEditorProps {
   scope: InferenceScope;
   onModeChange?: (mode: InferenceMode) => void;
@@ -171,6 +179,7 @@ export default function InferenceConfigEditor({
       setCustomReasoningApiKey={setField("customApiKey")}
       setReasoningMode={setMode}
       mode={mode}
+      allowChatGpt={CHATGPT_SCOPES.has(scope)}
     />
   );
 

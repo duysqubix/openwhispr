@@ -5755,6 +5755,146 @@ class IPCHandlers {
       }
     );
 
+    // ChatGPT subscription (OAuth, no API key). Tokens and network calls stay in
+    // main; the renderer only sees sign-in status and completion text.
+    let chatgptSubscription = null;
+    const getChatGptSubscription = () => {
+      if (chatgptSubscription) return chatgptSubscription;
+      const { createChatGptSubscription } = require("./chatgptSubscription");
+      const { createCredentialStore } = require("./connectors/credentialStore");
+      const { runOAuthLoopbackFlow } = require("./oauthLoopbackFlow");
+      const { renderOAuthResultPage } = require("./connectors/oauthResultPage");
+      const credentials = createCredentialStore({
+        dir: path.join(app.getPath("userData"), "chatgpt-auth"),
+        secretCrypto: require("./secretCrypto"),
+        logger: debugLogger,
+      });
+      chatgptSubscription = createChatGptSubscription({
+        store: {
+          read: () => credentials.read("chatgpt"),
+          write: (credential) => credentials.save("chatgpt", credential),
+          clear: () => credentials.clear("chatgpt"),
+        },
+        fetchImpl: (url, init) => proxyFetch(url, init),
+        runLoopbackFlow: runOAuthLoopbackFlow,
+        renderResultPage: ({ ok }) =>
+          renderOAuthResultPage({
+            ok,
+            title: i18nMain.t(
+              ok ? "chatgptAuth.browser.successTitle" : "chatgptAuth.browser.failedTitle"
+            ),
+            body: i18nMain.t(
+              ok ? "chatgptAuth.browser.successBody" : "chatgptAuth.browser.failedBody"
+            ),
+          }),
+        logger: debugLogger,
+      });
+      return chatgptSubscription;
+    };
+
+    ipcMain.handle("chatgpt-auth-status", () => {
+      try {
+        return getChatGptSubscription().getStatus();
+      } catch (error) {
+        debugLogger.warn("ChatGPT status unavailable", { error: error.message }, "chatgpt");
+        return { signedIn: false };
+      }
+    });
+
+    ipcMain.handle("chatgpt-auth-sign-in", async () => {
+      try {
+        const status = await getChatGptSubscription().signIn();
+        return { success: true, ...status };
+      } catch (error) {
+        debugLogger.warn("ChatGPT sign-in failed", { code: error.code }, "chatgpt");
+        return { success: false, code: error.code || null, error: error.message };
+      }
+    });
+
+    ipcMain.handle("chatgpt-auth-cancel-sign-in", () => {
+      getChatGptSubscription().cancelSignIn();
+      return { success: true };
+    });
+
+    ipcMain.handle("chatgpt-auth-sign-out", () => {
+      try {
+        return { success: true, ...getChatGptSubscription().signOut() };
+      } catch (error) {
+        return { success: false, error: error.message };
+      }
+    });
+
+    ipcMain.handle("chatgpt-list-models", async () => {
+      return getChatGptSubscription().listModels();
+    });
+
+    ipcMain.handle(
+      "process-chatgpt-reasoning",
+      async (event, text, modelId, _agentName, config) => {
+        const ctx = { provider: "ChatGPT", model: modelId, surface: "llm" };
+        const signedOutError = (message, messageKey) =>
+          Object.assign(providerError(PROVIDER_ERROR_CODES.AUTH_FAILED, ctx), {
+            message,
+            messageKey,
+          });
+        try {
+          if (!modelId) {
+            throw new Error("No model specified for ChatGPT call");
+          }
+          const { getLlmRequestTimeoutSeconds } = require("./llmRequestTimeout.js");
+          const timeoutSeconds = getLlmRequestTimeoutSeconds({ scope: config?.inferenceScope });
+          const outputText = await getChatGptSubscription().complete({
+            model: modelId,
+            instructions: config?.systemPrompt || "",
+            input: text,
+            signal: AbortSignal.timeout(timeoutSeconds * 1000),
+          });
+          if (!outputText.trim()) {
+            throw Object.assign(new Error("ChatGPT returned no text"), {
+              messageKey: CLEANUP_EMPTY_REPLY_MESSAGE_KEY,
+            });
+          }
+          return { success: true, text: outputText };
+        } catch (error) {
+          debugLogger.error("ChatGPT reasoning error:", {
+            code: error.code,
+            status: error.status,
+            message: error.message,
+          });
+          let classified;
+          if (error.code === "chatgpt_not_signed_in") {
+            classified = signedOutError(
+              "Sign in with ChatGPT in Settings to use your subscription.",
+              "chatgptAuth.errors.notSignedIn"
+            );
+          } else if (error.code === "chatgpt_session_expired" || error.status === 401) {
+            classified = signedOutError(
+              "Your ChatGPT session expired. Sign in again in Settings.",
+              "chatgptAuth.errors.sessionExpired"
+            );
+          } else if (typeof error.status === "number") {
+            classified = providerHttpError({
+              ...ctx,
+              status: error.status,
+              body: error.body,
+              headers: error.headers,
+            });
+          } else if (
+            error.code === "chatgpt_response_failed" ||
+            error.code === "chatgpt_response_incomplete"
+          ) {
+            classified = providerError(PROVIDER_ERROR_CODES.ERROR, {
+              ...ctx,
+              technicalDetails: { underlyingError: redactProviderBody(error.message) },
+            });
+          } else {
+            classified = asProviderError(error, ctx);
+          }
+          return { success: false, ...ipcErrorFields(classified) };
+        }
+      }
+    );
+
     ipcMain.handle("check-local-reasoning-available", async () => {
       try {
         const LocalReasoningService = require("../services/localReasoningBridge").default;

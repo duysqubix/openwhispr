@@ -18,7 +18,11 @@ const LOOPBACK_ADDRESSES = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
 const NO_CONTENT = Symbol("CliBridge.NoContent");
 
 function getBridgeFilePath() {
-  return path.join(os.homedir(), ".openwhispr", "cli-bridge.json");
+  // Non-production channels get their own file so a dev build never clobbers the installed app's token.
+  const channel = process.env.OPENWHISPR_CHANNEL;
+  const fileName =
+    channel && channel !== "production" ? `cli-bridge-${channel}.json` : "cli-bridge.json";
+  return path.join(os.homedir(), ".openwhispr", fileName);
 }
 
 async function findAvailablePort() {

@@ -46,6 +46,7 @@ export const PROVIDER_ICONS: Record<string, string> = {
   corti: cortiIcon,
   openrouter: openrouterIcon,
   tinfoil: tinfoilIcon,
+  chatgpt: openaiIcon,
   deepgram: deepgramIcon,
   assemblyai: assemblyaiIcon,
 };
@@ -65,6 +66,7 @@ export const MONOCHROME_PROVIDERS = [
   "openrouter",
   "tinfoil",
   "assemblyai",
+  "chatgpt",
 ] as const;
 
 export function isMonochromeProvider(provider: string): boolean {

@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "I modelli Corti sono disponibili solo nella regione UE."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (abbonamento)",
+      "description": "Usa il tuo abbonamento ChatGPT Plus o Pro. Nessuna chiave API necessaria.",
+      "signIn": "Accedi con ChatGPT",
+      "waiting": "Completa l'accesso nel browser…",
+      "cancel": "Annulla",
+      "signedIn": "Accesso a ChatGPT effettuato",
+      "signedInAs": "Accesso effettuato come {{email}}",
+      "plan": "Piano: {{plan}}",
+      "signOut": "Esci",
+      "signInFailed": "Accesso non riuscito. Riprova.",
+      "portBusy": "La porta 1455 è in uso, forse da un accesso di Codex CLI. Chiudilo e riprova.",
+      "timedOut": "Tempo scaduto per l'accesso. Riprova.",
+      "signInToSeeModels": "Accedi per vedere i modelli inclusi nel tuo piano.",
+      "loadingModels": "Caricamento dei modelli…",
+      "modelsFallback": "Impossibile caricare i modelli del tuo piano. Vengono mostrati quelli predefiniti."
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "Negata",
     "permissionRestricted": "Limitata",
     "permissionNotDetermined": "Non richiesta"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "Accesso a ChatGPT effettuato",
+      "successBody": "Puoi chiudere questa scheda e tornare a OpenWhispr.",
+      "failedTitle": "Accesso a ChatGPT non riuscito",
+      "failedBody": "Torna a OpenWhispr e riprova."
+    },
+    "errors": {
+      "notSignedIn": "Accedi con ChatGPT nelle Impostazioni per usare il tuo abbonamento.",
+      "sessionExpired": "La tua sessione ChatGPT è scaduta. Accedi di nuovo nelle Impostazioni."
+    }
   }
 }

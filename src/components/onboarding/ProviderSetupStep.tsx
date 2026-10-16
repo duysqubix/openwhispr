@@ -336,7 +336,10 @@ export function ByokProviderStep({
   const providers = useMemo(
     () =>
       filterByokProviderOptionsByPolicy<HostedProvider>(
-        assistant ? modelRegistry.getCloudProviders() : getTranscriptionProviders(),
+        assistant
+          ? // ChatGPT signs in with OAuth in Settings; this step only takes API keys.
+            modelRegistry.getCloudProviders().filter((provider) => provider.id !== "chatgpt")
+          : getTranscriptionProviders(),
         scope,
         policy
       ),

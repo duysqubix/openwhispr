@@ -788,6 +788,37 @@
           "supportsTemperature": true
         }
       ]
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "defaultModel": "gpt-5.6-luna",
+      "models": [
+        {
+          "id": "gpt-5.6-luna",
+          "name": "GPT-5.6 Luna",
+          "description": "Fastest and lowest-cost model in the GPT-5.6 family",
+          "descriptionKey": "models.descriptions.cloud.openai_gpt_5_6_luna"
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "name": "GPT-5.6 Terra",
+          "description": "Balanced capability, speed, and cost for everyday work",
+          "descriptionKey": "models.descriptions.cloud.openai_gpt_5_6_terra"
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "name": "GPT-5.6 Sol",
+          "description": "Flagship GPT-5.6 for complex coding, research, and agentic work, 1M context",
+          "descriptionKey": "models.descriptions.cloud.openai_gpt_5_6_sol"
+        },
+        {
+          "id": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "description": "OpenAI's most capable model for coding, computer use, and research, 1M context",
+          "descriptionKey": "models.descriptions.cloud.openai_gpt_6_astra"
+        }
+      ]
     }
   ],
   "enterpriseProviders": [

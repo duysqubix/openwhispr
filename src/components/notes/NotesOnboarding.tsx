@@ -187,6 +187,7 @@ export default function NotesOnboarding({ onComplete }: NotesOnboardingProps) {
                   customReasoningApiKey={cleanupConfig.customApiKey ?? ""}
                   setCustomReasoningApiKey={setCleanupCustomApiKey}
                   setReasoningMode={setCleanupMode}
+                  allowChatGpt
                 />
               </div>
             )}

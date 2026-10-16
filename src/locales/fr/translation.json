@@ -860,6 +860,23 @@
     },
     "corti": {
       "euOnly": "Les modèles Corti ne sont disponibles que dans la région UE."
+    },
+    "chatgpt": {
+      "providerName": "ChatGPT (abonnement)",
+      "description": "Utilisez votre abonnement ChatGPT Plus ou Pro. Aucune clé API nécessaire.",
+      "signIn": "Se connecter avec ChatGPT",
+      "waiting": "Terminez la connexion dans votre navigateur…",
+      "cancel": "Annuler",
+      "signedIn": "Connecté à ChatGPT",
+      "signedInAs": "Connecté en tant que {{email}}",
+      "plan": "Forfait : {{plan}}",
+      "signOut": "Se déconnecter",
+      "signInFailed": "La connexion a échoué. Réessayez.",
+      "portBusy": "Le port 1455 est déjà utilisé, peut-être par une connexion Codex CLI. Fermez-la et réessayez.",
+      "timedOut": "La connexion a expiré. Réessayez.",
+      "signInToSeeModels": "Connectez-vous pour voir les modèles inclus dans votre forfait.",
+      "loadingModels": "Chargement des modèles…",
+      "modelsFallback": "Impossible de charger les modèles de votre forfait. Modèles par défaut affichés."
     }
   },
   "transcription": {
@@ -4949,5 +4966,17 @@
     "permissionDenied": "Refusé",
     "permissionRestricted": "Restreint",
     "permissionNotDetermined": "Non demandé"
+  },
+  "chatgptAuth": {
+    "browser": {
+      "successTitle": "Connecté à ChatGPT",
+      "successBody": "Vous pouvez fermer cet onglet et revenir à OpenWhispr.",
+      "failedTitle": "Échec de la connexion à ChatGPT",
+      "failedBody": "Revenez à OpenWhispr et réessayez."
+    },
+    "errors": {
+      "notSignedIn": "Connectez-vous avec ChatGPT dans les Réglages pour utiliser votre abonnement.",
+      "sessionExpired": "Votre session ChatGPT a expiré. Reconnectez-vous dans les Réglages."
+    }
   }
 }
